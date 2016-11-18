@@ -80,9 +80,9 @@ public class ToGetLifecycleObject extends LifecycleListener.Adapter {
 
 ## Thanks
 * glide
-https://github.com/bumptech/glide
+https://github.com/bumptech/glide<br>
 * android-lifecycle
-https://github.com/xxv/android-lifecycle
+https://github.com/xxv/android-lifecycle<br>
 
 ## License
 ```
