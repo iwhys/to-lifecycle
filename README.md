@@ -24,8 +24,8 @@ dependencies {
 }
 ```
 
-3) Any Object to get the lifecycle of Activity/Fragment, only need implements the interface LifecycleListener, and then add to the LifecycleManager.
-We also offer two adapter classes, and you only need implement the method follow your needs. 
+3) Any Object to get the lifecycle of Activity/Fragment, only need implements the interface LifecycleListener, or extends its Adapter(LifecycleListener.Adapter/LifecycleListener.Priority), and then add to the LifecycleManager.
+With the adapter class, you only need implement the method follow your needs. 
 ```
 public class ToGetLifecycleObject extends LifecycleListener.Adapter {
 
