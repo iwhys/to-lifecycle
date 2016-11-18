@@ -78,8 +78,8 @@ public class ToGetLifecycleObject extends LifecycleListener.Adapter {
 4) See the demo for more details, and good luck.
 
 ## Thanks
-    * glide<br>
-    https://github.com/bumptech/glide
+    glide
+    <a href="https://github.com/bumptech/glide">https://github.com/bumptech/glide</a>
 
 ## License
 ```
