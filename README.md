@@ -1,5 +1,6 @@
 # to-lifecycle
-An useful library lets Object get the lifecycle of Activity/Fragment.
+An useful library lets Object get the lifecycle of Activity/Fragment.<br>
+The library is split from <a href="https://github.com/bumptech/glide">glide</a>.
 
 ## Usage
 
