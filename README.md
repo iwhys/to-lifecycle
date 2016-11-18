@@ -85,8 +85,4 @@ https://github.com/bumptech/glide
 https://github.com/xxv/android-lifecycle
 
 ## License
-```
-                                 Apache License
-                           Version 2.0, January 2004
-                        http://www.apache.org/licenses/
-```
+BSD, part MIT and Apache 2.0. See the [LICENSE][16] file for details.
