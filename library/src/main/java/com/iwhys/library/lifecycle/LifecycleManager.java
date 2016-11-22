@@ -33,7 +33,7 @@ public class LifecycleManager {
      *
      * @param activity activity
      */
-    public static LifecycleManager getInstance(Activity activity) {
+    public static LifecycleManager from(Activity activity) {
         return ManagerRetriever.getInstance().get(activity);
     }
 
@@ -42,7 +42,7 @@ public class LifecycleManager {
      *
      * @param fragment fragment
      */
-    public static LifecycleManager getInstance(Fragment fragment) {
+    public static LifecycleManager from(Fragment fragment) {
         return ManagerRetriever.getInstance().get(fragment);
     }
 
