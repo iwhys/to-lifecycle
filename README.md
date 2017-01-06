@@ -31,7 +31,7 @@ With the adapter class, you only need implement the method follow your needs.
 public class ToGetLifecycleObject extends LifecycleListener.Adapter {
 
     public ToGetLifecycleObject(Activity activity) {
-        LifecycleManager.getInstance(activity).add(this);
+        LifecycleManager.with(activity).add(this);
     }
     
     @Override
