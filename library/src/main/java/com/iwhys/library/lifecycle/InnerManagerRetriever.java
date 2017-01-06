@@ -16,7 +16,7 @@ import java.util.HashMap;
  *
  * @author devil
  */
-class ManagerRetriever implements Handler.Callback {
+class InnerManagerRetriever implements Handler.Callback {
 
     private final static String TAG = "lifecycle";
 
@@ -32,7 +32,7 @@ class ManagerRetriever implements Handler.Callback {
     /**
      * 等待提交被提交到Activity的Fragment容器
      */
-    private final HashMap<FragmentManager, LifecycleFragment> mPendingLifecycleFragments = new HashMap<>();
+    private final HashMap<FragmentManager, InnerLifecycleFragment> mPendingLifecycleFragments = new HashMap<>();
 
     /**
      * 发送消息handler
@@ -42,7 +42,7 @@ class ManagerRetriever implements Handler.Callback {
     /**
      * 获取实例
      */
-    static ManagerRetriever getInstance(){
+    static InnerManagerRetriever getInstance(){
         return ClassHolder.INSTANCE;
     }
 
@@ -50,13 +50,13 @@ class ManagerRetriever implements Handler.Callback {
      * 静态容器
      */
     private final static class ClassHolder{
-        private final static ManagerRetriever INSTANCE = new ManagerRetriever();
+        private final static InnerManagerRetriever INSTANCE = new InnerManagerRetriever();
     }
 
     /**
      * 构造方法
      */
-    private ManagerRetriever(){
+    private InnerManagerRetriever(){
     }
 
     /**
@@ -90,11 +90,11 @@ class ManagerRetriever implements Handler.Callback {
      * @return 生命周期管理者对象
      */
     private LifecycleManager getManager(FragmentManager fm){
-        LifecycleFragment fragment = (LifecycleFragment) fm.findFragmentByTag(LIFECYCLE_FRAGMENT_TAG);
+        InnerLifecycleFragment fragment = (InnerLifecycleFragment) fm.findFragmentByTag(LIFECYCLE_FRAGMENT_TAG);
         if (fragment == null) {
             fragment = mPendingLifecycleFragments.get(fm);
             if (fragment == null) {
-                fragment = new LifecycleFragment();
+                fragment = new InnerLifecycleFragment();
                 mPendingLifecycleFragments.put(fm, fragment);
                 fm.beginTransaction().add(fragment, LIFECYCLE_FRAGMENT_TAG).commitAllowingStateLoss();
                 mHandler.obtainMessage(REMOVE, fm).sendToTarget();

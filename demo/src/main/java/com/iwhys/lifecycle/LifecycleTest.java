@@ -124,8 +124,8 @@ public class LifecycleTest {
                 return 9999;
             }
         };
-        LifecycleManager.from(activity).add(lifecycleListener);
-        LifecycleManager.from(activity).add(lifecycleListenerPriority);
+        LifecycleManager.with(activity).add(lifecycleListener);
+        LifecycleManager.with(activity).add(lifecycleListenerPriority);
     }
 
 }

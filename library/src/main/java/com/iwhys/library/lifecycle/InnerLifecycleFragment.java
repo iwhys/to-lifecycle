@@ -1,6 +1,7 @@
 package com.iwhys.library.lifecycle;
 
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,7 +11,8 @@ import android.os.Bundle;
  *
  * @author devil
  */
-class LifecycleFragment extends Fragment {
+@SuppressLint("ValidFragment")
+class InnerLifecycleFragment extends Fragment {
 
     /**
      * 生命周期监听器管理类
@@ -62,14 +64,15 @@ class LifecycleFragment extends Fragment {
 
     @Override
     public void onStop() {
-        super.onStop();
         mLifecycleManager.onStop();
+        super.onStop();
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         mLifecycleManager.onDestroy();
+        mLifecycleManager.clear();
+        super.onDestroy();
     }
 
     @Override

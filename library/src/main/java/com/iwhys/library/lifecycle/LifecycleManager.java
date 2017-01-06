@@ -33,8 +33,8 @@ public class LifecycleManager {
      *
      * @param activity activity
      */
-    public static LifecycleManager from(Activity activity) {
-        return ManagerRetriever.getInstance().get(activity);
+    public static LifecycleManager with(Activity activity) {
+        return InnerManagerRetriever.getInstance().get(activity);
     }
 
     /**
@@ -42,9 +42,14 @@ public class LifecycleManager {
      *
      * @param fragment fragment
      */
-    public static LifecycleManager from(Fragment fragment) {
-        return ManagerRetriever.getInstance().get(fragment);
+    public static LifecycleManager with(Fragment fragment) {
+        return InnerManagerRetriever.getInstance().get(fragment);
     }
+
+    /**
+     * 不允许从外部创建
+     */
+    LifecycleManager(){}
 
     /**
      * 添加生命周期监听器
@@ -82,7 +87,7 @@ public class LifecycleManager {
     }
 
     /**
-     * 以下方法跟生命周期监听器{@link LifecycleListener}对应，由{@link LifecycleFragment}对象调用，实现生命周期联动功能
+     * 以下方法跟生命周期监听器{@link LifecycleListener}对应，由{@link InnerLifecycleFragment}对象调用，实现生命周期联动功能
      */
 
     void onCreate(Bundle savedInstanceState) {
