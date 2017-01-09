@@ -119,7 +119,7 @@ class InnerManagerRetriever implements Handler.Callback {
             handled = false;
         }
         if (handled &&  removed == null){
-            Log.w(TAG, "注意：移除指定的生命周期Fragment失败，对应的FragmentManager对象是：" + key);
+            Log.w(TAG, "注意：移除指定的生命周期Fragment失败");
         }
         return handled;
     }
@@ -127,7 +127,8 @@ class InnerManagerRetriever implements Handler.Callback {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private static void assertNotDestroyed(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && activity.isDestroyed()) {
-            Log.w(TAG, "注意：当前的Activity对象存在但已经被处于销毁状态！Activity名称：" + activity.getClass().getName());
+            Log.w(TAG, "注意：当前的Activity对象存在但已经被处于销毁状态！Activity名称：");
+            Log.w(TAG, activity.getClass().getName());
         }
     }
 
