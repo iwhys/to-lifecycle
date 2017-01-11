@@ -1,6 +1,5 @@
 package com.iwhys.library.lifecycle;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -65,7 +64,9 @@ class InnerManagerRetriever implements Handler.Callback {
      * @return 生命周期管理者对象
      */
     LifecycleManager get(Activity activity) {
-        assertNotDestroyed(activity);
+        if (isActivityDestroyed(activity)) {
+            return null;
+        }
         FragmentManager fm = activity.getFragmentManager();
         return getManager(fm);
     }
@@ -77,7 +78,7 @@ class InnerManagerRetriever implements Handler.Callback {
      */
     LifecycleManager get(Fragment fragment) {
         Activity activity = fragment.getActivity();
-        if (activity == null) {
+        if (activity == null || isActivityDestroyed(activity)) {
             Log.w(TAG, "注意：Fragment还没有附加到Activity，无法关联生命周期，声明周期管理对象为null");
             return null;
         }
@@ -124,11 +125,11 @@ class InnerManagerRetriever implements Handler.Callback {
         return handled;
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private static void assertNotDestroyed(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && activity.isDestroyed()) {
-            Log.w(TAG, "注意：当前的Activity对象存在但已经被处于销毁状态！Activity名称：");
-            Log.w(TAG, activity.getClass().getName());
+    private static boolean isActivityDestroyed(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return activity.isDestroyed();
+        } else {
+            return activity.getFragmentManager().isDestroyed();
         }
     }
 

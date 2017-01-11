@@ -29,21 +29,27 @@ public class LifecycleManager {
     private final ArrayList<LifecycleListener.Priority> mPriorityLifecycleListeners = new ArrayList<>();
 
     /**
-     * 获取生命周期管理者对象
-     *
+     * 绑定监听器到activity，采用这种方式绑定是为了兼容Activity被销毁的情况
      * @param activity activity
+     * @param lifecycleListener 监听器
      */
-    public static LifecycleManager with(Activity activity) {
-        return InnerManagerRetriever.getInstance().get(activity);
+    public static void bind(Activity activity, LifecycleListener lifecycleListener) {
+        LifecycleManager manager = InnerManagerRetriever.getInstance().get(activity);
+        if (manager != null) {
+            manager.add(lifecycleListener);
+        }
     }
 
     /**
-     * 获取生命周期管理者对象
-     *
+     * 绑定监听器到activity，采用这种方式绑定是为了兼容Activity被销毁的情况
      * @param fragment fragment
+     * @param lifecycleListener 监听器
      */
-    public static LifecycleManager with(Fragment fragment) {
-        return InnerManagerRetriever.getInstance().get(fragment);
+    public static void bind(Fragment fragment, LifecycleListener lifecycleListener) {
+        LifecycleManager manager = InnerManagerRetriever.getInstance().get(fragment);
+        if (manager != null) {
+            manager.add(lifecycleListener);
+        }
     }
 
     /**
@@ -56,7 +62,7 @@ public class LifecycleManager {
      *
      * @param lifecycleListener 监听器
      */
-    public void add(LifecycleListener lifecycleListener) {
+    private void add(LifecycleListener lifecycleListener) {
         if (lifecycleListener instanceof LifecycleListener.Priority) {
             mPriorityLifecycleListeners.add((LifecycleListener.Priority) lifecycleListener);
             Collections.sort(mPriorityLifecycleListeners);
