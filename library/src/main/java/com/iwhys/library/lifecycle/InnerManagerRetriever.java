@@ -129,7 +129,11 @@ class InnerManagerRetriever implements Handler.Callback {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             return activity.isDestroyed();
         } else {
-            return activity.getFragmentManager().isDestroyed();
+            try {
+                // 这里使用try/catch是因为部分16的手机上会出现找不到该方法的异常
+                return activity.getFragmentManager().isDestroyed();
+            } catch (Exception ignore) {}
+            return true;
         }
     }
 
