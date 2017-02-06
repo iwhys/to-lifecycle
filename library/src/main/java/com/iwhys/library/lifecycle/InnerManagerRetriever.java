@@ -3,11 +3,14 @@ package com.iwhys.library.lifecycle;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
 import java.util.HashMap;
+
+import static android.R.attr.key;
 
 /**
  * Description: 单例,用来创建或者从对应的Activity/Fragment中获取要参数生命周期联动的对象
@@ -110,10 +113,8 @@ class InnerManagerRetriever implements Handler.Callback {
     public boolean handleMessage(Message msg) {
         boolean handled = true;
         Object removed = null;
-        Object key = null;
         if(msg.what == REMOVE){
             FragmentManager fm = (FragmentManager) msg.obj;
-            key = fm;
             removed = mPendingLifecycleFragments.remove(fm);
         } else {
             handled = false;
@@ -129,7 +130,7 @@ class InnerManagerRetriever implements Handler.Callback {
      * @param activity activity
      */
     private static boolean isActivityDestroyed(Activity activity) {
-        return activity.isDestroyed();
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && activity.isDestroyed();
     }
 
 }
