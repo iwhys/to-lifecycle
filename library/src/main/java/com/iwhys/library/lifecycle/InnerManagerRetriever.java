@@ -10,8 +10,6 @@ import android.util.Log;
 
 import java.util.HashMap;
 
-import static android.R.attr.key;
-
 /**
  * Description: 单例,用来创建或者从对应的Activity/Fragment中获取要参数生命周期联动的对象
  *
