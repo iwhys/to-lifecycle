@@ -33,11 +33,13 @@ public class LifecycleManager {
      * @param activity activity
      * @param lifecycleListener 监听器
      */
-    public static void bind(Activity activity, LifecycleListener lifecycleListener) {
+    public static boolean bind(Activity activity, LifecycleListener lifecycleListener) {
         LifecycleManager manager = InnerManagerRetriever.getInstance().get(activity);
-        if (manager != null) {
+        boolean success = manager != null;
+        if (success) {
             manager.add(lifecycleListener);
         }
+        return success;
     }
 
     /**
@@ -45,11 +47,13 @@ public class LifecycleManager {
      * @param fragment fragment
      * @param lifecycleListener 监听器
      */
-    public static void bind(Fragment fragment, LifecycleListener lifecycleListener) {
+    public static boolean bind(Fragment fragment, LifecycleListener lifecycleListener) {
         LifecycleManager manager = InnerManagerRetriever.getInstance().get(fragment);
-        if (manager != null) {
+        boolean success = manager != null;
+        if (success) {
             manager.add(lifecycleListener);
         }
+        return success;
     }
 
     /**

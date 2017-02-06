@@ -3,7 +3,6 @@ package com.iwhys.library.lifecycle;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -125,16 +124,12 @@ class InnerManagerRetriever implements Handler.Callback {
         return handled;
     }
 
+    /**
+     * 17一下的api默认Activity没有销毁，需要自行判断
+     * @param activity activity
+     */
     private static boolean isActivityDestroyed(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return activity.isDestroyed();
-        } else {
-            try {
-                // 这里使用try/catch是因为部分16的手机上会出现找不到该方法的异常
-                return activity.getFragmentManager().isDestroyed();
-            } catch (Exception ignore) {}
-            return true;
-        }
+        return activity.isDestroyed();
     }
 
 }
